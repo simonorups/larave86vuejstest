@@ -132,14 +132,12 @@ class ArtistController extends Controller
         foreach($toptracks as $key=>$toptrack){
             $artist['toptracks'][$key] = $toptrack["name"];
         }
-        sort($artist['toptracks']);
 
         $topalbums = $response[3]['topalbums']['album'];
         foreach($topalbums as $key=>$topalbum){
             $artist['topalbums'][$key] = $topalbum["name"];
         }
-        sort($artist['topalbums']);
-
+        
         return $artist;
 
     }

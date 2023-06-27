@@ -96,47 +96,28 @@ class AlbumController extends Controller
     // edit album
     public function search($name)
     {
-        $search     = "method=album.Search&album=".$name."&limit=1";
-        $getSimilar = "method=album.getSimilar&album=".$name;
-        $getTopTracks = "method=album.getTopTracks&album=".$name;
-        $getTopAlbums = "method=album.getTopAlbums&album=".$name;
-
-        //var_dump(self::LAST_FM_URL.$search, self::LAST_FM_URL.$getSimilar, self::LAST_FM_URL.$getTopTracks, self::LAST_FM_URL.$getTopAlbums);
-
         $album = $response = [];
 
-        //execute concurrently for performance
-        $poolResponse = Http::pool(fn (Pool $pool) => [
-            $pool->get(self::LAST_FM_URL.$search),
-            $pool->get(self::LAST_FM_URL.$getSimilar),
-            $pool->get(self::LAST_FM_URL.$getTopTracks),
-            $pool->get(self::LAST_FM_URL.$getTopAlbums),
-        ]);
+        $search  = "method=album.Search&album=".$name."&limit=1";
+        // var_dump(self::LAST_FM_URL.$search);
+        $response = Http::get(self::LAST_FM_URL.$search)->json();
+        $name     = $response['results']['albummatches']['album'][0]['name'];
+        $artist   = $response['results']['albummatches']['album'][0]['artist'];
 
-        $response[0] = $poolResponse[0]->json();
-        $response[1] = $poolResponse[1]->json();
-        $response[2] = $poolResponse[2]->json();
-        $response[3] = $poolResponse[3]->json();
+        $album['name'] = $name;
+        $album['artist'] = $artist;
 
-        $album['name'] = $response[0]['results']['albummatches']['album'][0]['name'];
+        $getInfo = "method=album.getInfo&album=".$name."&artist=".$artist;
+        //var_dump(self::LAST_FM_URL.$getInfo);
+        $response = Http::get(self::LAST_FM_URL.$getInfo)->json();
         
-        $similaralbums = $response[1]['similaralbums']['album'];
-        foreach($similaralbums as $key=>$similaralbum){
-            $album['similaralbums'][$key] = $similaralbum["name"];
-        }
-        sort($album['similaralbums']);
-
-        $toptracks = $response[2]['toptracks']['track'];
+        $toptracks = $response['albums']['tracks']['track'];
         foreach($toptracks as $key=>$toptrack){
-            $album['toptracks'][$key] = $toptrack["name"];
+            $album['tracks'][$key]['name'] = $toptrack["name"];
+            $album['tracks'][$key]['duration'] = $toptrack["duration"];
         }
-        sort($album['toptracks']);
-
-        $topalbums = $response[3]['topalbums']['album'];
-        foreach($topalbums as $key=>$topalbum){
-            $album['topalbums'][$key] = $topalbum["name"];
-        }
-        sort($album['topalbums']);
+        $published = $response['albums']['wiki']['published'];
+        $album['published'] = $published;
 
         return $album;
 
