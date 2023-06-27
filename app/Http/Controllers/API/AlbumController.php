@@ -111,13 +111,14 @@ class AlbumController extends Controller
         //var_dump(self::LAST_FM_URL.$getInfo);
         $response = Http::get(self::LAST_FM_URL.$getInfo)->json();
         
-        $toptracks = $response['albums']['tracks']['track'];
-        foreach($toptracks as $key=>$toptrack){
-            $album['tracks'][$key]['name'] = $toptrack["name"];
-            $album['tracks'][$key]['duration'] = $toptrack["duration"];
+        $tracks = $response['albums']['tracks']['track'];
+        foreach($tracks as $key=>$track){
+            $album['tracks'][$key]['name'] = $track["name"];
+            $album['tracks'][$key]['duration'] = $track["duration"];
         }
-        $published = $response['albums']['wiki']['published'];
-        $album['published'] = $published;
+
+        $release_date = $response['albums']['wiki']['published'];
+        $album['release_date'] = $release_date;
 
         return $album;
 

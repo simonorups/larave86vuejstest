@@ -19,9 +19,9 @@
                 <div class="card-header">
                     <div class="row">
                         <div class="col-md-9">
-                            <h4>Details about <b class="text-info">{{ album.name }}</b></h4>
+                            <h4>Details about album <b class="text-info">{{ album.name }}</b></h4>
                         </div>
-                        <div class="col-md-3" v-if="album.toptracks">
+                        <div class="col-md-3" v-if="album.tracks">
                             <button class="btn btn-sm btn-success float-end" @click="addToFavourites()">
                                 <i class="bi bi-person-plus-fill"></i> Add to favourites
                             </button>
@@ -31,19 +31,19 @@
                 </div>
                 <div class="card-body">
 
-                    <div class="accordion" id="accordionExample" v-if="album.toptracks">
+                    <div class="accordion" id="accordionExample" v-if="album.tracks">
                         <div class="accordion-item">
                             <h2 class="accordion-header" id="headingOne">
                                 <button class="accordion-button" type="button" data-bs-toggle="collapse"
                                     data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                    #1 Top Tracks
+                                    #1 Tracks
                                 </button>
                             </h2>
                             <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne"
                                 data-bs-parent="#accordionExample">
                                 <div class="accordion-body">
-                                    <ol id="toptracks" type="1" class="spancols">
-                                        <li v-for="item in album.toptracks">
+                                    <ol id="tracks" type="1" class="spancols">
+                                        <li v-for="item in album.tracks">
                                             {{ item }}
                                         </li>
                                     </ol>
@@ -54,17 +54,13 @@
                             <h2 class="accordion-header" id="headingTwo">
                                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                                     data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                                    #2 Top Albums
+                                    #2 Artist
                                 </button>
                             </h2>
                             <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo"
                                 data-bs-parent="#accordionExample">
                                 <div class="accordion-body">
-                                    <ol id="topalbums" type="1" class="spancols">
-                                        <li v-for="item in album.topalbums">
-                                            {{ item }}
-                                        </li>
-                                    </ol>
+                                    {{ album.artist }}
                                 </div>
                             </div>
                         </div>
@@ -72,17 +68,13 @@
                             <h2 class="accordion-header" id="headingThree">
                                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                                     data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                                    #3 Similar Albums
+                                    #3 Release date
                                 </button>
                             </h2>
                             <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree"
                                 data-bs-parent="#accordionExample">
                                 <div class="accordion-body">
-                                    <ol id="similaralbums" type="1" class="similaralbums">
-                                        <li v-for="item in album.similaralbums">
-                                            {{ item }}
-                                        </li>
-                                    </ol>
+                                    {{ album.release_date }}
                                 </div>
                             </div>
                         </div>
