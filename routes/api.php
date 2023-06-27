@@ -34,7 +34,8 @@ Route::middleware(['auth:sanctum'])->group(function () {
         Route::post('update/{id}', [PostController::class, 'update']);
         Route::delete('delete/{id}', [PostController::class, 'delete']);
     });
-
+    
+    Route::get('/albums/search/{name}/artist/{artist}', [AlbumController::class, 'search']);
     Route::get('/artists/search/{name}', [ArtistController::class, 'search']);
     Route::apiResources([
         'artists' => ArtistController::class,

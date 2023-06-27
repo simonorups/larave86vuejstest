@@ -17,7 +17,8 @@
                     <thead>
                         <tr>
                             <th>ID</th>
-                            <th width="30%">Name</th>
+                            <th width="20%">Name</th>
+                            <th width="20%">Artist</th>
                             <th>Created At</th>
                             <th>Updated At</th>
                             <th width="10%">Actions</th>
@@ -27,6 +28,7 @@
                         <tr v-for="album in albums" :key="album.id">
                             <td>{{ album.id }}</td>
                             <td>{{ album.name }}</td>
+                            <td>{{ album.artist }}</td>
                             <td>{{ album.created_at }}</td>
                             <td>{{ album.updated_at }}</td>
                             <td>

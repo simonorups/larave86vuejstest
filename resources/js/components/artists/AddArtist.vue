@@ -21,10 +21,13 @@
                         <div class="col-md-9">
                             <h4>Details about <b class="text-info">{{ artist.name }}</b></h4>
                         </div>
-                        <div class="col-md-3" v-if="artist.toptracks">
-                            <button class="btn btn-sm btn-success float-end" @click="addToFavourites()">
+                        <div class="col-md-3">
+                            <button class="btn btn-sm btn-success float-end" v-if="artist.toptracks" @click="addToFavourites()">
                                 <i class="bi bi-person-plus-fill"></i> Add to favourites
                             </button>
+                            <router-link :to="{ name: 'artists' }" class="btn btn-primary btn-sm float-end">
+                                <i class="bi bi-arrow-left"></i> Back to artist list
+                            </router-link>
                         </div>
                     </div>
 
@@ -131,7 +134,7 @@ export default {
 
             this.axios
                 .post('http://localhost:8000/api/artists', {
-                    name : this.artist.name
+                    name: this.artist.name
                 })
                 .then(response => (
                     this.$router.push({ name: 'artists' })

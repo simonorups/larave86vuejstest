@@ -8,12 +8,11 @@ use App\Models\Artist;
 
 use Illuminate\Http\Client\Pool;
 use Illuminate\Support\Facades\Http;
-
-use Illuminate\Support\Facades\Auth;
+use Exception;
 
 class ArtistController extends Controller
 {
-    private const LAST_FM_URL = 'http://ws.audioscrobbler.com/2.0/?api_key=b703f6c39ed526249165ee98d6e06f39&format=json&';//
+    private const LAST_FM_URL = 'http://ws.audioscrobbler.com/2.0/?api_key=b703f6c39ed526249165ee98d6e06f39&format=json&'; //
 
     /**
      * Display a listing of the resource.
@@ -98,47 +97,51 @@ class ArtistController extends Controller
     // edit artist
     public function search($name)
     {
-        $search     = "method=artist.Search&artist=".$name."&limit=1";
-        $getSimilar = "method=artist.getSimilar&artist=".$name;
-        $getTopTracks = "method=artist.getTopTracks&artist=".$name;
-        $getTopAlbums = "method=artist.getTopAlbums&artist=".$name;
+        try {
+            $search     = "method=artist.Search&artist=" . $name . "&limit=1";
+            $getSimilar = "method=artist.getSimilar&artist=" . $name;
+            $getTopTracks = "method=artist.getTopTracks&artist=" . $name;
+            $getTopAlbums = "method=artist.getTopAlbums&artist=" . $name;
 
-        //var_dump(self::LAST_FM_URL.$search, self::LAST_FM_URL.$getSimilar, self::LAST_FM_URL.$getTopTracks, self::LAST_FM_URL.$getTopAlbums);
+            //var_dump(self::LAST_FM_URL.$search, self::LAST_FM_URL.$getSimilar, self::LAST_FM_URL.$getTopTracks, self::LAST_FM_URL.$getTopAlbums);
 
-        $artist = $response = [];
+            $artist = $response = [];
 
-        //execute concurrently for performance
-        $poolResponse = Http::pool(fn (Pool $pool) => [
-            $pool->get(self::LAST_FM_URL.$search),
-            $pool->get(self::LAST_FM_URL.$getSimilar),
-            $pool->get(self::LAST_FM_URL.$getTopTracks),
-            $pool->get(self::LAST_FM_URL.$getTopAlbums),
-        ]);
+            //execute concurrently for performance
+            $poolResponse = Http::pool(fn (Pool $pool) => [
+                $pool->get(self::LAST_FM_URL . $search),
+                $pool->get(self::LAST_FM_URL . $getSimilar),
+                $pool->get(self::LAST_FM_URL . $getTopTracks),
+                $pool->get(self::LAST_FM_URL . $getTopAlbums),
+            ]);
 
-        $response[0] = $poolResponse[0]->json();
-        $response[1] = $poolResponse[1]->json();
-        $response[2] = $poolResponse[2]->json();
-        $response[3] = $poolResponse[3]->json();
+            $response[0] = $poolResponse[0]->json();
+            $response[1] = $poolResponse[1]->json();
+            $response[2] = $poolResponse[2]->json();
+            $response[3] = $poolResponse[3]->json();
 
-        $artist['name'] = $response[0]['results']['artistmatches']['artist'][0]['name'];
-        
-        $similarartists = $response[1]['similarartists']['artist'];
-        foreach($similarartists as $key=>$similarartist){
-            $artist['similarartists'][$key] = $similarartist["name"];
+            $artist['name'] = $response[0]['results']['artistmatches']['artist'][0]['name'];
+
+            $similarartists = $response[1]['similarartists']['artist'];
+            foreach ($similarartists as $key => $similarartist) {
+                $artist['similarartists'][$key] = $similarartist["name"];
+            }
+            sort($artist['similarartists']);
+
+            $toptracks = $response[2]['toptracks']['track'];
+            foreach ($toptracks as $key => $toptrack) {
+                $artist['toptracks'][$key] = $toptrack["name"];
+            }
+
+            $topalbums = $response[3]['topalbums']['album'];
+            foreach ($topalbums as $key => $topalbum) {
+                $artist['topalbums'][$key] = $topalbum["name"];
+            }
+        } catch (Exception $ex) {
+            //$album = "could not get match";//.$ex->getMessage();
+            return $ex;
         }
-        sort($artist['similarartists']);
 
-        $toptracks = $response[2]['toptracks']['track'];
-        foreach($toptracks as $key=>$toptrack){
-            $artist['toptracks'][$key] = $toptrack["name"];
-        }
-
-        $topalbums = $response[3]['topalbums']['album'];
-        foreach($topalbums as $key=>$topalbum){
-            $artist['topalbums'][$key] = $topalbum["name"];
-        }
-        
         return $artist;
-
     }
 }

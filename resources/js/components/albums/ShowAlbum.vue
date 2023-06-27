@@ -9,7 +9,7 @@
                         <div class="col-md-9">
                             <h4>Details about album <b class="text-info">{{ album.name }}</b></h4>
                         </div>
-                        <div class="col-md-3" v-if="album.toptracks">
+                        <div class="col-md-3" v-if="album.tracks">
                             <router-link :to="{ name: 'albums'}" class="btn btn-primary btn-sm float-end">
                                 <i class="bi bi-arrow-left"></i> Back to album list
                             </router-link>
@@ -19,7 +19,7 @@
 
                 <div class="card-body">
 
-                    <div class="accordion" id="accordionExample" v-if="album.toptracks">
+                    <div class="accordion" id="accordionExample" v-if="album.tracks">
                         <div class="accordion-item">
                             <h2 class="accordion-header" id="headingOne">
                                 <button class="accordion-button" type="button" data-bs-toggle="collapse"
@@ -30,9 +30,9 @@
                             <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne"
                                 data-bs-parent="#accordionExample">
                                 <div class="accordion-body">
-                                    <ol id="toptracks" type="1" class="spancols">
-                                        <li v-for="item in album.toptracks">
-                                            {{ item }}
+                                    <ol id="tracks" type="1" class="spancols">
+                                        <li v-for="item in album.tracks">
+                                            {{ item.name + " : " + item.duration + "s" }}
                                         </li>
                                     </ol>
                                 </div>
@@ -100,9 +100,9 @@ export default {
             .get(`http://localhost:8000/api/albums/${this.$route.params.id}`)
             .then((response) => {
                 this.album = response.data;
-                // console.log(response.data);
+                //console.log(response.data);
                 this.axios
-                    .get(`http://localhost:8000/api/albums/search/${this.album.name}`)
+                    .get(`http://localhost:8000/api/albums/search/${this.album.name}/artist/${this.album.artist}`)
                     .then(response => {
                         // this.$router.push({ name: 'album.add' })
                         // console.log(response.data)
