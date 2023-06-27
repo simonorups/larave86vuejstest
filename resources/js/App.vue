@@ -37,13 +37,13 @@
                                     <a class="nav-link" href="#">Pricing</a>
                                 </li> -->
                                     <li class="nav-item dropdown">
-                                        <a class="nav-link dropdown-toggle" href="#" id="posts" role="button"
+                                        <a class="nav-link dropdown-toggle" href="#" id="albums" role="button"
                                             data-bs-toggle="dropdown" aria-expanded="false">
                                             Posts
                                         </a>
-                                        <ul class="dropdown-menu" aria-labelledby="posts">
-                                            <li><a class="dropdown-item" href="/home">List</a></li>
-                                            <li><a class="dropdown-item" href="/add">Add</a></li>
+                                        <ul class="dropdown-menu" aria-labelledby="albums">
+                                            <li><a class="dropdown-item" href="/albums">List</a></li>
+                                            <li><a class="dropdown-item" href="/album/add">Add</a></li>
                                         </ul>
                                     </li>
                                     <li class="nav-item dropdown">
