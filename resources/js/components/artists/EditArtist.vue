@@ -25,7 +25,7 @@
                             <button class="btn btn-sm btn-success float-start" @click="updateArtist()">
                                 <i class="bi bi-person-check-fill"></i> Update favourites
                             </button>
-                            <router-link :to="{ name: 'artists'}" class="btn btn-primary btn-sm float-end">
+                            <router-link :to="{ name: 'artists' }" class="btn btn-primary btn-sm float-end">
                                 <i class="bi bi-arrow-left"></i> Back to artist list
                             </router-link>
                         </div>
@@ -125,12 +125,29 @@ export default {
                 this.artist = response.data;
                 // console.log(response.data);
                 this.axios
-                .get(`http://localhost:8000/api/artists/search/${this.artist.name}`)
-                .then(response => {
-                    // this.$router.push({ name: 'artist.add' })
-                    // console.log(response.data)
-                    this.artist = response.data;
-                })
+                    .get(`http://localhost:8000/api/artists/search/${this.artist.name}`)
+                    .then(response => {
+                        // this.$router.push({ name: 'artist.add' })
+                        // console.log(response.data)
+                        this.artist = response.data;
+                    })
+            })
+            .catch(error => {
+                // console.dir(error)
+                console.log(error.response.status)
+                if (error.response.status == 401) {
+                    this.axios.get('http://localhost:8000/api/auth/logout')
+                        .then(response => {
+                            console.log(response.data.status)
+                            if (response.data.status == 200) {
+                                // Simulate an HTTP redirect:
+                                window.location.replace("http://localhost:8000/login?issue=loggedout");
+                            }
+                        })
+                        .catch(error => {
+                            console.dir(error)
+                        });
+                }
             });
     },
     methods: {
@@ -149,7 +166,7 @@ export default {
         updateArtist() {
             this.axios
                 .put(`http://localhost:8000/api/artists/${this.$route.params.id}`, {
-                    name : this.artist.name
+                    name: this.artist.name
                 })
                 .then((response) => {
                     this.$router.push({ name: 'artists' });

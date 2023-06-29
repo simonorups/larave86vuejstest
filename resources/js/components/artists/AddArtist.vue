@@ -22,7 +22,8 @@
                             <h4>Details about <b class="text-info">{{ artist.name }}</b></h4>
                         </div>
                         <div class="col-md-3">
-                            <button class="btn btn-sm btn-success float-end" v-if="artist.toptracks" @click="addToFavourites()">
+                            <button class="btn btn-sm btn-success float-end" v-if="artist.toptracks"
+                                @click="addToFavourites()">
                                 <i class="bi bi-person-plus-fill"></i> Add to favourites
                             </button>
                             <router-link :to="{ name: 'artists' }" class="btn btn-primary btn-sm float-end">
@@ -127,7 +128,23 @@ export default {
                     // console.log(response.data)
                     this.artist = response.data;
                 })
-                .catch(error => console.log(error))
+                .catch(error => {
+                    // console.dir(error)
+                    console.log(error.response.status)
+                    if (error.response.status == 401) {
+                        this.axios.get('http://localhost:8000/api/auth/logout')
+                            .then(response => {
+                                console.log(response.data.status)
+                                if (response.data.status == 200) {
+                                    // Simulate an HTTP redirect:
+                                    window.location.replace("http://localhost:8000/login?issue=loggedout");
+                                }
+                            })
+                            .catch(error => {
+                                console.dir(error)
+                            });
+                    }
+                })
                 .finally(() => this.loading = false)
         },
         addToFavourites() {

@@ -41,18 +41,12 @@ class AuthController extends Controller
 
     }
 
-    /* public function logout(Request $request)
+    public function logout(Request $request)
     {      
-        $user = $request->user();
-
-        if ($user) {
-            $user->api_token = null;
-            $user->save();
-        }
-        
-        //$user->guard()->logout();
         auth()->guard()->logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
         
         return response()->json(['status' => 200, 'message' => 'User logged out successfully.'], 200);
-    } */
+    }
 }

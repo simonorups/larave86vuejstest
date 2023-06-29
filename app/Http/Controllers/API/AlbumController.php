@@ -97,19 +97,19 @@ class AlbumController extends Controller
     public function search($name, $artist)
     {
         try {
-            $album = $response = [];
+            //$album = $response = [];
 
             $search  = "method=album.Search&album=" . $name;
             // var_dump(self::LAST_FM_URL.$search);
             $response = Http::get(self::LAST_FM_URL . $search)->json();
 
-            $albummatches = $response['results']['albummatches']['album'];
+            $albummatches = isset($response['results']['albummatches']['album']) ? $response['results']['albummatches']['album'] : [];
             //var_dump($albummatches);
             $album['name'] = $name;
             $album['artist'] = $artist;
 
             foreach ($albummatches as $key => $albummatch) {
-                //echo "\n".$albummatch['name']."--".$albummatch['artist']."::".$name."--".$artist." 88 ".(strtolower($albummatch['name']) == strtolower($name))."xx".(strtolower($albummatch['artist']) == strtolower($artist));
+                echo "\n" . $albummatch['name'] . "--" . $albummatch['artist'] . "::" . $name . "--" . $artist . " 88 " . (strtolower($albummatch['name']) == strtolower($name)) . "xx" . (strtolower($albummatch['artist']) == strtolower($artist));
                 if ((strtolower($albummatch['name']) == strtolower($name)) && (strtolower($albummatch['artist']) == strtolower($artist))) {
                     $album['name'] = $albummatch['name'];
                     $album['artist'] = $albummatch['artist'];
@@ -120,30 +120,40 @@ class AlbumController extends Controller
             //var_dump(self::LAST_FM_URL . $getInfo);
             $response = Http::get(self::LAST_FM_URL . $getInfo)->json();
 
-            //dd($response);
+            //dd($response, $album);
             //if there're no songs don't return it.
             //if ($response) {
-                $tracks = $response['album']['tracks']['track'];
-                if (is_array($tracks)) {
-                    foreach ($tracks as $key => $track) {
-                        $album['tracks'][$key]['name'] = $track["name"];
-                        $album['tracks'][$key]['duration'] = $track["duration"] ?? "Unknown";
-                    }
-                    $release_date = $response['album']['wiki']['published'];
-                    $album['release_date'] = $release_date;
-                } else {
-                    //dd("No tracks found");
-                    $album['error'] = $response['message']."---No tracks found";
-                    return response()->json($album);
+            $tracks = isset($response['album']['tracks']['track']) ? $response['album']['tracks']['track'] : [];
+            //dd($tracks);
+
+            if (count($tracks) > 1) {
+                foreach ($tracks as $key => $track) {
+                    echo "<pre>";
+                    var_dump($track);
+                    echo "</pre>";
+                    $album['tracks'][$key]['name'] = $track["name"];
+                    $album['tracks'][$key]['duration'] = $track["duration"] ?? "Unknown";
                 }
+                $release_date = isset($response['album']['wiki']) ? $response['album']['wiki']['published'] : "Undefined";
+                $album['release_date'] = $release_date;
+            } elseif (count($tracks) == 1) {
+                $album['tracks']['name'] = $tracks["name"];
+                $album['tracks']['duration'] = $tracks["duration"] ?? "Unknown";
+            } else {
+                //dd("No tracks found");
+                $album['error'] = $response['message'] . "---No tracks found";
+                return response()->json($album);
+            }
             //} else {
-                //dd("No albums found");
-                //$album['error'] = $response['message'];
-                //return response()->json($album);
-           // }
+            //dd("No albums found");
+            //$album['error'] = $response['message'];
+            //return response()->json($album);
+            // }
+
+            //dd($album);
 
         } catch (Exception $ex) {
-            //dd($ex);
+            dd($ex);
             return response()->json($ex->getMessage());
         }
 

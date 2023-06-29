@@ -5222,7 +5222,19 @@ __webpack_require__.r(__webpack_exports__);
         //console.log(response.data)
         _this.album = response.data;
       })["catch"](function (error) {
-        return console.log(error);
+        // console.dir(error)
+        console.log(error.response.status);
+        if (error.response.status == 401) {
+          _this.axios.get('http://localhost:8000/api/auth/logout').then(function (response) {
+            console.log(response.data.status);
+            if (response.data.status == 200) {
+              // Simulate an HTTP redirect:
+              window.location.replace("http://localhost:8000/login?issue=loggedout");
+            }
+          })["catch"](function (error) {
+            console.dir(error);
+          });
+        }
       })["finally"](function () {
         return _this.loading = false;
       });
@@ -5239,7 +5251,19 @@ __webpack_require__.r(__webpack_exports__);
         // console.log(response.data)
         ;
       })["catch"](function (error) {
-        return console.log(error);
+        // console.dir(error)
+        console.log(error.response.status);
+        if (error.response.status == 401) {
+          _this2.axios.get('http://localhost:8000/api/auth/logout').then(function (response) {
+            console.log(response.data.status);
+            if (response.data.status == 200) {
+              // Simulate an HTTP redirect:
+              window.location.replace("http://localhost:8000/login?issue=loggedout");
+            }
+          })["catch"](function (error) {
+            console.dir(error);
+          });
+        }
       })["finally"](function () {
         return _this2.loading = false;
       });
@@ -5270,6 +5294,20 @@ __webpack_require__.r(__webpack_exports__);
     var _this = this;
     this.axios.get('http://localhost:8000/api/albums').then(function (response) {
       _this.albums = response.data;
+    })["catch"](function (error) {
+      // console.dir(error)
+      console.log(error.response.status);
+      if (error.response.status == 401) {
+        _this.axios.get('http://localhost:8000/api/auth/logout').then(function (response) {
+          console.log(response.data.status);
+          if (response.data.status == 200) {
+            // Simulate an HTTP redirect:
+            window.location.replace("http://localhost:8000/login?issue=loggedout");
+          }
+        })["catch"](function (error) {
+          console.dir(error);
+        });
+      }
     });
   },
   methods: {
@@ -5281,6 +5319,8 @@ __webpack_require__.r(__webpack_exports__);
             return item.id;
           }).indexOf(id); // find index of your object
           _this2.albums.splice(i, 1);
+        })["catch"](function (error) {
+          console.log(error);
         });
       }
     }
@@ -5316,6 +5356,20 @@ __webpack_require__.r(__webpack_exports__);
         // console.log(response.data)
         _this.album = response.data;
       });
+    })["catch"](function (error) {
+      // console.dir(error)
+      console.log(error.response.status);
+      if (error.response.status == 401) {
+        _this.axios.get('http://localhost:8000/api/auth/logout').then(function (response) {
+          console.log(response.data.status);
+          if (response.data.status == 200) {
+            // Simulate an HTTP redirect:
+            window.location.replace("http://localhost:8000/login?issue=loggedout");
+          }
+        })["catch"](function (error) {
+          console.dir(error);
+        });
+      }
     });
   },
   methods: {
@@ -5374,6 +5428,20 @@ __webpack_require__.r(__webpack_exports__);
         // console.log(response.data)
         _this.album = response.data;
       });
+    })["catch"](function (error) {
+      // console.dir(error)
+      console.log(error.response.status);
+      if (error.response.status == 401) {
+        _this.axios.get('http://localhost:8000/api/auth/logout').then(function (response) {
+          console.log(response.data.status);
+          if (response.data.status == 200) {
+            // Simulate an HTTP redirect:
+            window.location.replace("http://localhost:8000/login?issue=loggedout");
+          }
+        })["catch"](function (error) {
+          console.dir(error);
+        });
+      }
     });
   },
   methods: {
@@ -5408,7 +5476,19 @@ __webpack_require__.r(__webpack_exports__);
         // console.log(response.data)
         _this.artist = response.data;
       })["catch"](function (error) {
-        return console.log(error);
+        // console.dir(error)
+        console.log(error.response.status);
+        if (error.response.status == 401) {
+          _this.axios.get('http://localhost:8000/api/auth/logout').then(function (response) {
+            console.log(response.data.status);
+            if (response.data.status == 200) {
+              // Simulate an HTTP redirect:
+              window.location.replace("http://localhost:8000/login?issue=loggedout");
+            }
+          })["catch"](function (error) {
+            console.dir(error);
+          });
+        }
       })["finally"](function () {
         return _this.loading = false;
       });
@@ -5455,6 +5535,20 @@ __webpack_require__.r(__webpack_exports__);
     var _this = this;
     this.axios.get('http://localhost:8000/api/artists').then(function (response) {
       _this.artists = response.data;
+    })["catch"](function (error) {
+      // console.dir(error)
+      console.log(error.response.status);
+      if (error.response.status == 401) {
+        _this.axios.get('http://localhost:8000/api/auth/logout').then(function (response) {
+          console.log(response.data.status);
+          if (response.data.status == 200) {
+            // Simulate an HTTP redirect:
+            window.location.replace("http://localhost:8000/login?issue=loggedout");
+          }
+        })["catch"](function (error) {
+          console.dir(error);
+        });
+      }
     });
   },
   methods: {
@@ -5501,6 +5595,20 @@ __webpack_require__.r(__webpack_exports__);
         // console.log(response.data)
         _this.artist = response.data;
       });
+    })["catch"](function (error) {
+      // console.dir(error)
+      console.log(error.response.status);
+      if (error.response.status == 401) {
+        _this.axios.get('http://localhost:8000/api/auth/logout').then(function (response) {
+          console.log(response.data.status);
+          if (response.data.status == 200) {
+            // Simulate an HTTP redirect:
+            window.location.replace("http://localhost:8000/login?issue=loggedout");
+          }
+        })["catch"](function (error) {
+          console.dir(error);
+        });
+      }
     });
   },
   methods: {
@@ -5559,6 +5667,20 @@ __webpack_require__.r(__webpack_exports__);
         // console.log(response.data)
         _this.artist = response.data;
       });
+    })["catch"](function (error) {
+      // console.dir(error)
+      console.log(error.response.status);
+      if (error.response.status == 401) {
+        _this.axios.get('http://localhost:8000/api/auth/logout').then(function (response) {
+          console.log(response.data.status);
+          if (response.data.status == 200) {
+            // Simulate an HTTP redirect:
+            window.location.replace("http://localhost:8000/login?issue=loggedout");
+          }
+        })["catch"](function (error) {
+          console.dir(error);
+        });
+      }
     });
   },
   methods: {

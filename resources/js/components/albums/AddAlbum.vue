@@ -21,10 +21,12 @@
                 <div class="card-header">
                     <div class="row">
                         <div class="col-md-9">
-                            <h4>Details about album <b class="text-info" v-if="album.tracks">{{ album.name }} by {{ album.artist }}</b></h4>
+                            <h4>Details about album <b class="text-info" v-if="album.tracks">{{ album.name }} by {{
+                                album.artist }}</b></h4>
                         </div>
                         <div class="col-md-3">
-                            <button class="btn btn-sm btn-success float-start" v-if="album.tracks" @click="addToFavourites()">
+                            <button class="btn btn-sm btn-success float-start" v-if="album.tracks"
+                                @click="addToFavourites()">
                                 <i class="bi bi-person-plus-fill"></i> Add to favourites
                             </button>
                             <router-link :to="{ name: 'albums' }" class="btn btn-primary btn-sm float-end">
@@ -121,20 +123,52 @@ export default {
                     //console.log(response.data)
                     this.album = response.data;
                 })
-                .catch(error => console.log(error))
+                .catch(error => {
+                    // console.dir(error)
+                    console.log(error.response.status)
+                    if (error.response.status == 401) {
+                        this.axios.get('http://localhost:8000/api/auth/logout')
+                            .then(response => {
+                                console.log(response.data.status)
+                                if (response.data.status == 200) {
+                                    // Simulate an HTTP redirect:
+                                    window.location.replace("http://localhost:8000/login?issue=loggedout");
+                                }
+                            })
+                            .catch(error => {
+                                console.dir(error)
+                            });
+                    }
+                })
                 .finally(() => this.loading = false)
         },
         addToFavourites() {
             this.axios
                 .post('http://localhost:8000/api/albums', {
-                    name: this.album.name, 
-                    artist: this.album.artist, 
+                    name: this.album.name,
+                    artist: this.album.artist,
                 })
                 .then(response => (
                     this.$router.push({ name: 'albums' })
                     // console.log(response.data)
                 ))
-                .catch(error => console.log(error))
+                .catch(error => {
+                    // console.dir(error)
+                    console.log(error.response.status)
+                    if (error.response.status == 401) {
+                        this.axios.get('http://localhost:8000/api/auth/logout')
+                            .then(response => {
+                                console.log(response.data.status)
+                                if (response.data.status == 200) {
+                                    // Simulate an HTTP redirect:
+                                    window.location.replace("http://localhost:8000/login?issue=loggedout");
+                                }
+                            })
+                            .catch(error => {
+                                console.dir(error)
+                            });
+                    }
+                })
                 .finally(() => this.loading = false)
         }
     }

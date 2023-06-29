@@ -105,7 +105,7 @@ class ArtistController extends Controller
 
             //var_dump(self::LAST_FM_URL.$search, self::LAST_FM_URL.$getSimilar, self::LAST_FM_URL.$getTopTracks, self::LAST_FM_URL.$getTopAlbums);
 
-            $artist = $response = [];
+            // $artist = $response = [];
 
             //execute concurrently for performance
             $poolResponse = Http::pool(fn (Pool $pool) => [
