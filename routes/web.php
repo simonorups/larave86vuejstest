@@ -29,11 +29,6 @@ Auth::routes(['register' => false]);
 Route::post('/user/login', [LoginController::class, 'login']);
 Route::get('logout', [LoginController::class, 'logout']);
 
-//override the default 
-/* Route::get('/', function () {
-    return view('layouts.app');
-}); */
-
 Route::get('authorize/google', [LoginController::class, 'redirectToGoogle']);
 Route::get('authorized/google/callback', [LoginController::class, 'handleGoogleCallback']);
 
