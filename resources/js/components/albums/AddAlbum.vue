@@ -49,12 +49,18 @@
                             <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne"
                                 data-bs-parent="#accordionExample">
                                 <div class="accordion-body">
-                                    <ol id="tracks" type="1" class="spancols">
+                                    <ol id="tracks" type="1" class="spancols" v-if="album.tracks.length > 1">
                                         <li v-for="item in album.tracks">
                                             {{ item.name + " : " + item.duration + "s" }}
                                         </li>
                                     </ol>
-                                </div>
+                                    <ol id="tracks" type="1" class="spancols" v-else-if="album.tracks.length == 1">
+                                        <li>
+                                            {{ album.tracks.name + " : " + album.tracks.duration + "s" }}
+                                        </li>
+                                    </ol>
+                                    <p v-else>{{ "No tracks found" }}</p>
+                                </div>                                
                             </div>
                         </div>
                         <div class="accordion-item">
@@ -120,16 +126,17 @@ export default {
             this.axios
                 .get(`http://localhost:8000/api/albums/search/${this.album.name}/artist/${this.album.artist}`)
                 .then(response => {
-                    //console.log(response.data)
+                    // console.dir(response.data)
+                    // console.dir(response.data.tracks)
                     this.album = response.data;
                 })
                 .catch(error => {
                     // console.dir(error)
-                    console.log(error.response.status)
+                    // console.log(error.response.status)
                     if (error.response.status == 401) {
                         this.axios.get('http://localhost:8000/api/auth/logout')
                             .then(response => {
-                                console.log(response.data.status)
+                                // console.log(response.data.status)
                                 if (response.data.status == 200) {
                                     // Simulate an HTTP redirect:
                                     window.location.replace("http://localhost:8000/login?issue=loggedout");
@@ -154,11 +161,11 @@ export default {
                 ))
                 .catch(error => {
                     // console.dir(error)
-                    console.log(error.response.status)
+                    // console.log(error.response.status)
                     if (error.response.status == 401) {
                         this.axios.get('http://localhost:8000/api/auth/logout')
                             .then(response => {
-                                console.log(response.data.status)
+                                // console.log(response.data.status)
                                 if (response.data.status == 200) {
                                     // Simulate an HTTP redirect:
                                     window.location.replace("http://localhost:8000/login?issue=loggedout");

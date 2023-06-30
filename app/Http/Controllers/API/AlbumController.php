@@ -33,21 +33,27 @@ class AlbumController extends Controller
      */
     public function store(Request $request)
     {
-        //dd($request->input('name'), $request->query('name'));
-        /* dd(session("loggedInUser"));
-        $loggedInUser = [];
-        if ($request->session()->has('loggedInUser')) {
-            $loggedInUser = session("loggedInUser");
-        }
-
-        dd(Auth::user(), $loggedInUser); */
-
-        $album = new Album([
-            'name' => $request->input('name'),
-            'artist' => $request->input('artist'),
-            'user_id' => auth()->user()->id,
+        $request->validate([
+            'name' => 'required|max:255',
+            'artist' => 'required|max:255',
         ]);
-        $album->save();
+
+        //ensure no such record exists in the DB to avoid duplicates
+        $name = $request->input('name');
+        $artist = $request->input('artist');
+
+        $albumExists = Album::firstWhere(["name"=>$name, "artist"=>$artist]);
+
+        if($albumExists){
+            return response()->json('Album by artist already exists');
+        }else{
+            $album = new Album([
+                'name' => $request->input('name'),
+                'artist' => $request->input('artist'),
+                'user_id' => auth()->user()->id,
+            ]);
+            $album->save();
+        }
 
         return response()->json('The album successfully added');
     }
@@ -109,7 +115,7 @@ class AlbumController extends Controller
             $album['artist'] = $artist;
 
             foreach ($albummatches as $key => $albummatch) {
-                echo "\n" . $albummatch['name'] . "--" . $albummatch['artist'] . "::" . $name . "--" . $artist . " 88 " . (strtolower($albummatch['name']) == strtolower($name)) . "xx" . (strtolower($albummatch['artist']) == strtolower($artist));
+                // echo "\n" . $albummatch['name'] . "--" . $albummatch['artist'] . "::" . $name . "--" . $artist . " 88 " . (strtolower($albummatch['name']) == strtolower($name)) . "xx" . (strtolower($albummatch['artist']) == strtolower($artist));
                 if ((strtolower($albummatch['name']) == strtolower($name)) && (strtolower($albummatch['artist']) == strtolower($artist))) {
                     $album['name'] = $albummatch['name'];
                     $album['artist'] = $albummatch['artist'];
@@ -119,43 +125,41 @@ class AlbumController extends Controller
             $getInfo = "method=album.getInfo&album=" . $album['name'] . "&artist=" . $album['artist'];
             //var_dump(self::LAST_FM_URL . $getInfo);
             $response = Http::get(self::LAST_FM_URL . $getInfo)->json();
-
             //dd($response, $album);
-            //if there're no songs don't return it.
-            //if ($response) {
-            $tracks = isset($response['album']['tracks']['track']) ? $response['album']['tracks']['track'] : [];
-            //dd($tracks);
 
-            if (count($tracks) > 1) {
+            $tracks = isset($response['album']['tracks']['track']) ? $response['album']['tracks']['track'] : [];
+
+            //dd($tracks, $album);
+
+            if (count($tracks) > 1 && array_is_list($tracks)) {
+                // $album['tracks']['count'] = count(array_keys($tracks));
                 foreach ($tracks as $key => $track) {
-                    echo "<pre>";
+                    /*  echo "<pre>";
                     var_dump($track);
-                    echo "</pre>";
+                    echo "</pre>"; */
                     $album['tracks'][$key]['name'] = $track["name"];
                     $album['tracks'][$key]['duration'] = $track["duration"] ?? "Unknown";
                 }
                 $release_date = isset($response['album']['wiki']) ? $response['album']['wiki']['published'] : "Undefined";
                 $album['release_date'] = $release_date;
-            } elseif (count($tracks) == 1) {
+            } elseif (count($tracks) > 1 && !array_is_list($tracks)) {
+                //dd("one track found");
                 $album['tracks']['name'] = $tracks["name"];
                 $album['tracks']['duration'] = $tracks["duration"] ?? "Unknown";
+                $release_date = isset($response['album']['wiki']) ? $response['album']['wiki']['published'] : "Undefined";
+                $album['release_date'] = $release_date;
             } else {
                 //dd("No tracks found");
-                $album['error'] = $response['message'] . "---No tracks found";
-                return response()->json($album);
+                $album['tracks'] = [];
+                $album['release_date'] = "Undefined";
+                //return response()->json($album);
             }
-            //} else {
-            //dd("No albums found");
-            //$album['error'] = $response['message'];
-            //return response()->json($album);
-            // }
-
-            //dd($album);
-
         } catch (Exception $ex) {
-            dd($ex);
+            //dd($ex);
             return response()->json($ex->getMessage());
         }
+
+        //dd($album);
 
         return $album;
     }

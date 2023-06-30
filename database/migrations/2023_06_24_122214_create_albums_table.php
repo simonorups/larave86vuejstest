@@ -24,6 +24,7 @@ class CreateAlbumsTable extends Migration
                   ->onDelete('CASCADE');
                   
             $table->string('name');
+            $table->string('artist');
             $table->timestamps();
         });
     }

@@ -5219,14 +5219,15 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
       //console.log(this.album.name)
       this.axios.get("http://localhost:8000/api/albums/search/".concat(this.album.name, "/artist/").concat(this.album.artist)).then(function (response) {
-        //console.log(response.data)
+        // console.dir(response.data)
+        // console.dir(response.data.tracks)
         _this.album = response.data;
       })["catch"](function (error) {
         // console.dir(error)
-        console.log(error.response.status);
+        // console.log(error.response.status)
         if (error.response.status == 401) {
           _this.axios.get('http://localhost:8000/api/auth/logout').then(function (response) {
-            console.log(response.data.status);
+            // console.log(response.data.status)
             if (response.data.status == 200) {
               // Simulate an HTTP redirect:
               window.location.replace("http://localhost:8000/login?issue=loggedout");
@@ -5252,10 +5253,10 @@ __webpack_require__.r(__webpack_exports__);
         ;
       })["catch"](function (error) {
         // console.dir(error)
-        console.log(error.response.status);
+        // console.log(error.response.status)
         if (error.response.status == 401) {
           _this2.axios.get('http://localhost:8000/api/auth/logout').then(function (response) {
-            console.log(response.data.status);
+            // console.log(response.data.status)
             if (response.data.status == 200) {
               // Simulate an HTTP redirect:
               window.location.replace("http://localhost:8000/login?issue=loggedout");
@@ -5296,10 +5297,10 @@ __webpack_require__.r(__webpack_exports__);
       _this.albums = response.data;
     })["catch"](function (error) {
       // console.dir(error)
-      console.log(error.response.status);
+      // console.log(error.response.status)
       if (error.response.status == 401) {
         _this.axios.get('http://localhost:8000/api/auth/logout').then(function (response) {
-          console.log(response.data.status);
+          // console.log(response.data.status)
           if (response.data.status == 200) {
             // Simulate an HTTP redirect:
             window.location.replace("http://localhost:8000/login?issue=loggedout");
@@ -5358,10 +5359,10 @@ __webpack_require__.r(__webpack_exports__);
       });
     })["catch"](function (error) {
       // console.dir(error)
-      console.log(error.response.status);
+      // console.log(error.response.status)
       if (error.response.status == 401) {
         _this.axios.get('http://localhost:8000/api/auth/logout').then(function (response) {
-          console.log(response.data.status);
+          // console.log(response.data.status)
           if (response.data.status == 200) {
             // Simulate an HTTP redirect:
             window.location.replace("http://localhost:8000/login?issue=loggedout");
@@ -5430,10 +5431,10 @@ __webpack_require__.r(__webpack_exports__);
       });
     })["catch"](function (error) {
       // console.dir(error)
-      console.log(error.response.status);
+      // console.log(error.response.status)
       if (error.response.status == 401) {
         _this.axios.get('http://localhost:8000/api/auth/logout').then(function (response) {
-          console.log(response.data.status);
+          // console.log(response.data.status)
           if (response.data.status == 200) {
             // Simulate an HTTP redirect:
             window.location.replace("http://localhost:8000/login?issue=loggedout");
@@ -5477,10 +5478,10 @@ __webpack_require__.r(__webpack_exports__);
         _this.artist = response.data;
       })["catch"](function (error) {
         // console.dir(error)
-        console.log(error.response.status);
+        // console.log(error.response.status)
         if (error.response.status == 401) {
           _this.axios.get('http://localhost:8000/api/auth/logout').then(function (response) {
-            console.log(response.data.status);
+            // console.log(response.data.status)
             if (response.data.status == 200) {
               // Simulate an HTTP redirect:
               window.location.replace("http://localhost:8000/login?issue=loggedout");
@@ -5537,10 +5538,10 @@ __webpack_require__.r(__webpack_exports__);
       _this.artists = response.data;
     })["catch"](function (error) {
       // console.dir(error)
-      console.log(error.response.status);
+      // console.log(error.response.status)
       if (error.response.status == 401) {
         _this.axios.get('http://localhost:8000/api/auth/logout').then(function (response) {
-          console.log(response.data.status);
+          // console.log(response.data.status)
           if (response.data.status == 200) {
             // Simulate an HTTP redirect:
             window.location.replace("http://localhost:8000/login?issue=loggedout");
@@ -5597,10 +5598,10 @@ __webpack_require__.r(__webpack_exports__);
       });
     })["catch"](function (error) {
       // console.dir(error)
-      console.log(error.response.status);
+      // console.log(error.response.status)
       if (error.response.status == 401) {
         _this.axios.get('http://localhost:8000/api/auth/logout').then(function (response) {
-          console.log(response.data.status);
+          // console.log(response.data.status)
           if (response.data.status == 200) {
             // Simulate an HTTP redirect:
             window.location.replace("http://localhost:8000/login?issue=loggedout");
@@ -5669,10 +5670,10 @@ __webpack_require__.r(__webpack_exports__);
       });
     })["catch"](function (error) {
       // console.dir(error)
-      console.log(error.response.status);
+      // console.log(error.response.status)
       if (error.response.status == 401) {
         _this.axios.get('http://localhost:8000/api/auth/logout').then(function (response) {
-          console.log(response.data.status);
+          // console.log(response.data.status)
           if (response.data.status == 200) {
             // Simulate an HTTP redirect:
             window.location.replace("http://localhost:8000/login?issue=loggedout");
@@ -5797,32 +5798,6 @@ var staticRenderFns = [function () {
     staticClass: "nav-link dropdown-toggle",
     attrs: {
       href: "#",
-      id: "albums",
-      role: "button",
-      "data-bs-toggle": "dropdown",
-      "aria-expanded": "false"
-    }
-  }, [_vm._v("\n                                        Albums\n                                    ")]), _vm._v(" "), _c("ul", {
-    staticClass: "dropdown-menu",
-    attrs: {
-      "aria-labelledby": "albums"
-    }
-  }, [_c("li", [_c("a", {
-    staticClass: "dropdown-item",
-    attrs: {
-      href: "/albums"
-    }
-  }, [_vm._v("List")])]), _vm._v(" "), _c("li", [_c("a", {
-    staticClass: "dropdown-item",
-    attrs: {
-      href: "/album/add"
-    }
-  }, [_vm._v("Add")])])])]), _vm._v(" "), _c("li", {
-    staticClass: "nav-item dropdown"
-  }, [_c("a", {
-    staticClass: "nav-link dropdown-toggle",
-    attrs: {
-      href: "#",
       id: "artists",
       role: "button",
       "data-bs-toggle": "dropdown",
@@ -5842,6 +5817,32 @@ var staticRenderFns = [function () {
     staticClass: "dropdown-item",
     attrs: {
       href: "/artist/add"
+    }
+  }, [_vm._v("Add")])])])]), _vm._v(" "), _c("li", {
+    staticClass: "nav-item dropdown"
+  }, [_c("a", {
+    staticClass: "nav-link dropdown-toggle",
+    attrs: {
+      href: "#",
+      id: "albums",
+      role: "button",
+      "data-bs-toggle": "dropdown",
+      "aria-expanded": "false"
+    }
+  }, [_vm._v("\n                                        Albums\n                                    ")]), _vm._v(" "), _c("ul", {
+    staticClass: "dropdown-menu",
+    attrs: {
+      "aria-labelledby": "albums"
+    }
+  }, [_c("li", [_c("a", {
+    staticClass: "dropdown-item",
+    attrs: {
+      href: "/albums"
+    }
+  }, [_vm._v("List")])]), _vm._v(" "), _c("li", [_c("a", {
+    staticClass: "dropdown-item",
+    attrs: {
+      href: "/album/add"
     }
   }, [_vm._v("Add")])])])])]), _vm._v(" "), _c("div", {
     staticClass: "col-md-1"
@@ -6235,7 +6236,7 @@ var render = function render() {
     }
   }, [_c("div", {
     staticClass: "accordion-body"
-  }, [_c("ol", {
+  }, [_vm.album.tracks.length > 1 ? _c("ol", {
     staticClass: "spancols",
     attrs: {
       id: "tracks",
@@ -6243,7 +6244,13 @@ var render = function render() {
     }
   }, _vm._l(_vm.album.tracks, function (item) {
     return _c("li", [_vm._v("\n                                        " + _vm._s(item.name + " : " + item.duration + "s") + "\n                                    ")]);
-  }), 0)])])]), _vm._v(" "), _c("div", {
+  }), 0) : _vm.album.tracks.length == 1 ? _c("ol", {
+    staticClass: "spancols",
+    attrs: {
+      id: "tracks",
+      type: "1"
+    }
+  }, [_c("li", [_vm._v("\n                                        " + _vm._s(_vm.album.tracks.name + " : " + _vm.album.tracks.duration + "s") + "\n                                    ")])]) : _c("p", [_vm._v(_vm._s("No tracks found"))])])])]), _vm._v(" "), _c("div", {
     staticClass: "accordion-item"
   }, [_vm._m(2), _vm._v(" "), _c("div", {
     staticClass: "accordion-collapse collapse",
@@ -6890,7 +6897,7 @@ var render = function render() {
   }, [_vm._v(_vm._s(_vm.artist.name))])])]), _vm._v(" "), _c("div", {
     staticClass: "col-md-3"
   }, [_vm.artist.toptracks ? _c("button", {
-    staticClass: "btn btn-sm btn-success float-end",
+    staticClass: "btn btn-sm btn-success float-start",
     on: {
       click: function click($event) {
         return _vm.addToFavourites();

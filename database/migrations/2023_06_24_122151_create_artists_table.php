@@ -23,7 +23,7 @@ class CreateArtistsTable extends Migration
                   ->onUpdate('CASCADE')
                   ->onDelete('CASCADE');
                   
-            $table->string('name');
+            $table->string('name')->unique();
             $table->timestamps();
         });
     }

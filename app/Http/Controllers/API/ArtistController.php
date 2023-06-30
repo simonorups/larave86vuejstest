@@ -35,20 +35,24 @@ class ArtistController extends Controller
      */
     public function store(Request $request)
     {
-        //dd($request->input('name'), $request->query('name'));
-        /* dd(session("loggedInUser"));
-        $loggedInUser = [];
-        if ($request->session()->has('loggedInUser')) {
-            $loggedInUser = session("loggedInUser");
-        }
-
-        dd(Auth::user(), $loggedInUser); */
-
-        $artist = new Artist([
-            'name' => $request->input('name'),
-            'user_id' => auth()->user()->id,
+        $request->validate([
+            'name' => 'required|max:255',
         ]);
-        $artist->save();
+
+        //ensure no such record exists in the DB to avoid duplicates
+        $name = $request->input('name');
+
+        $artistExists = Artist::firstWhere("name", $name);
+
+        if ($artistExists) {
+            return response()->json('Artist already exists');
+        } else {
+            $artist = new Artist([
+                'name' => $request->input('name'),
+                'user_id' => auth()->user()->id,
+            ]);
+            $artist->save();
+        }
 
         return response()->json('The artist successfully added');
     }

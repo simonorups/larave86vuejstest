@@ -30,22 +30,7 @@
                                     <li class="nav-item">
                                         <a class="nav-link active" aria-current="page" href="/home">Home</a>
                                     </li>
-                                    <!-- <li class="nav-item">
-                                    <a class="nav-link" href="#">Features</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="#">Pricing</a>
-                                </li> -->
-                                    <li class="nav-item dropdown">
-                                        <a class="nav-link dropdown-toggle" href="#" id="albums" role="button"
-                                            data-bs-toggle="dropdown" aria-expanded="false">
-                                            Albums
-                                        </a>
-                                        <ul class="dropdown-menu" aria-labelledby="albums">
-                                            <li><a class="dropdown-item" href="/albums">List</a></li>
-                                            <li><a class="dropdown-item" href="/album/add">Add</a></li>
-                                        </ul>
-                                    </li>
+ 
                                     <li class="nav-item dropdown">
                                         <a class="nav-link dropdown-toggle" href="#" id="artists" role="button"
                                             data-bs-toggle="dropdown" aria-expanded="false">
@@ -56,20 +41,33 @@
                                             <li><a class="dropdown-item" href="/artist/add">Add</a></li>
                                         </ul>
                                     </li>
+                                    
+                                    <li class="nav-item dropdown">
+                                        <a class="nav-link dropdown-toggle" href="#" id="albums" role="button"
+                                            data-bs-toggle="dropdown" aria-expanded="false">
+                                            Albums
+                                        </a>
+                                        <ul class="dropdown-menu" aria-labelledby="albums">
+                                            <li><a class="dropdown-item" href="/albums">List</a></li>
+                                            <li><a class="dropdown-item" href="/album/add">Add</a></li>
+                                        </ul>
+                                    </li>
+                                   
                                 </ul>
                                 <div class="col-md-1">
-                                    <a class="btn btn-sm btn-danger float-end" href="/logout"><i class="bi bi-box-arrow-right"></i> Logout</a>
+                                    <a class="btn btn-sm btn-danger float-end" href="/logout"><i
+                                            class="bi bi-box-arrow-right"></i> Logout</a>
                                 </div>
                             </div>
                         </div>
                     </nav>
-                    
+
                 </div>
             </div>
         </div>
 
         <router-view></router-view>
-        
+
     </div>
 </template>
  
