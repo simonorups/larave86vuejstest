@@ -11,8 +11,10 @@ NOTE: This documentation assumes you have composer, docker, php, curl already in
 
 ## 3. Install all required dependencies
 
-```sudo docker start```
-```composer install --ignore-platform-reqs```
+```
+sudo docker start
+composer install --ignore-platform-reqs
+```
 
 NOTE: This may take a while if this is the first time installing this as a container.
 
@@ -26,8 +28,10 @@ NOTE: This may take a while if this is the first time installing this as a conta
 
 ## 6. Create a database to be used by this project by running these commands below
 
-```mysql --password=  --execute='create database laravel8vuetest'```
-```exit```
+```
+mysql --password=  --execute='create database laravel8vuetest'
+exit
+```
 
 ## 7. Copy .env File 
 
