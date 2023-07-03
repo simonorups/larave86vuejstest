@@ -22,7 +22,7 @@ NOTE: This may take a while if this is the first time installing this as a conta
 
 ## 5. Run the servers with Sail 
 
-````vendor/bin/sail up or sail up -d``` to have the containers run in the background
+```vendor/bin/sail up or sail up -d``` to have the containers run in the background
 
 ## 6. Create a database to be used by this project by running these commands below
 
