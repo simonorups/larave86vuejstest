@@ -7452,20 +7452,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   routes: () => (/* binding */ routes)
 /* harmony export */ });
 /* harmony import */ var _components_auth_Login_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./components/auth/Login.vue */ "./resources/js/components/auth/Login.vue");
-Object(function webpackMissingModule() { var e = new Error("Cannot find module './components/AllPosts.vue'"); e.code = 'MODULE_NOT_FOUND'; throw e; }());
-Object(function webpackMissingModule() { var e = new Error("Cannot find module './components/AddPost.vue'"); e.code = 'MODULE_NOT_FOUND'; throw e; }());
-Object(function webpackMissingModule() { var e = new Error("Cannot find module './components/EditPost.vue'"); e.code = 'MODULE_NOT_FOUND'; throw e; }());
-/* harmony import */ var _components_artists_AllArtists_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/artists/AllArtists.vue */ "./resources/js/components/artists/AllArtists.vue");
-/* harmony import */ var _components_artists_AddArtist_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/artists/AddArtist.vue */ "./resources/js/components/artists/AddArtist.vue");
-/* harmony import */ var _components_artists_EditArtist_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/artists/EditArtist.vue */ "./resources/js/components/artists/EditArtist.vue");
-/* harmony import */ var _components_artists_ShowArtist_vue__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/artists/ShowArtist.vue */ "./resources/js/components/artists/ShowArtist.vue");
-/* harmony import */ var _components_albums_AllAlbums_vue__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/albums/AllAlbums.vue */ "./resources/js/components/albums/AllAlbums.vue");
-/* harmony import */ var _components_albums_AddAlbum_vue__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/albums/AddAlbum.vue */ "./resources/js/components/albums/AddAlbum.vue");
-/* harmony import */ var _components_albums_EditAlbum_vue__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./components/albums/EditAlbum.vue */ "./resources/js/components/albums/EditAlbum.vue");
-/* harmony import */ var _components_albums_ShowAlbum_vue__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./components/albums/ShowAlbum.vue */ "./resources/js/components/albums/ShowAlbum.vue");
-
-
-
+/* harmony import */ var _components_artists_AllArtists_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./components/artists/AllArtists.vue */ "./resources/js/components/artists/AllArtists.vue");
+/* harmony import */ var _components_artists_AddArtist_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/artists/AddArtist.vue */ "./resources/js/components/artists/AddArtist.vue");
+/* harmony import */ var _components_artists_EditArtist_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/artists/EditArtist.vue */ "./resources/js/components/artists/EditArtist.vue");
+/* harmony import */ var _components_artists_ShowArtist_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/artists/ShowArtist.vue */ "./resources/js/components/artists/ShowArtist.vue");
+/* harmony import */ var _components_albums_AllAlbums_vue__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/albums/AllAlbums.vue */ "./resources/js/components/albums/AllAlbums.vue");
+/* harmony import */ var _components_albums_AddAlbum_vue__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/albums/AddAlbum.vue */ "./resources/js/components/albums/AddAlbum.vue");
+/* harmony import */ var _components_albums_EditAlbum_vue__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/albums/EditAlbum.vue */ "./resources/js/components/albums/EditAlbum.vue");
+/* harmony import */ var _components_albums_ShowAlbum_vue__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./components/albums/ShowAlbum.vue */ "./resources/js/components/albums/ShowAlbum.vue");
 
 
 
@@ -7482,47 +7476,47 @@ var routes = [{
 }, {
   name: 'home',
   path: '/home',
-  component: _components_artists_AllArtists_vue__WEBPACK_IMPORTED_MODULE_2__["default"]
+  component: _components_artists_AllArtists_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
 }, {
   name: 'add',
   path: '/add',
-  component: Object(function webpackMissingModule() { var e = new Error("Cannot find module './components/AddPost.vue'"); e.code = 'MODULE_NOT_FOUND'; throw e; }())
+  component: AddPost
 }, {
   name: 'edit',
   path: '/edit/:id',
-  component: Object(function webpackMissingModule() { var e = new Error("Cannot find module './components/EditPost.vue'"); e.code = 'MODULE_NOT_FOUND'; throw e; }())
+  component: EditPost
 }, {
   name: 'artists',
   path: '/artists',
-  component: _components_artists_AllArtists_vue__WEBPACK_IMPORTED_MODULE_2__["default"]
+  component: _components_artists_AllArtists_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
 }, {
   name: 'artist.add',
   path: '/artist/add',
-  component: _components_artists_AddArtist_vue__WEBPACK_IMPORTED_MODULE_3__["default"]
+  component: _components_artists_AddArtist_vue__WEBPACK_IMPORTED_MODULE_2__["default"]
 }, {
   name: 'artist.edit',
   path: '/artist/edit/:id',
-  component: _components_artists_EditArtist_vue__WEBPACK_IMPORTED_MODULE_4__["default"]
+  component: _components_artists_EditArtist_vue__WEBPACK_IMPORTED_MODULE_3__["default"]
 }, {
   name: 'artist.show',
   path: '/artist/show/:id',
-  component: _components_artists_ShowArtist_vue__WEBPACK_IMPORTED_MODULE_5__["default"]
+  component: _components_artists_ShowArtist_vue__WEBPACK_IMPORTED_MODULE_4__["default"]
 }, {
   name: 'albums',
   path: '/albums',
-  component: _components_albums_AllAlbums_vue__WEBPACK_IMPORTED_MODULE_6__["default"]
+  component: _components_albums_AllAlbums_vue__WEBPACK_IMPORTED_MODULE_5__["default"]
 }, {
   name: 'album.add',
   path: '/album/add',
-  component: _components_albums_AddAlbum_vue__WEBPACK_IMPORTED_MODULE_7__["default"]
+  component: _components_albums_AddAlbum_vue__WEBPACK_IMPORTED_MODULE_6__["default"]
 }, {
   name: 'album.edit',
   path: '/album/edit/:id',
-  component: _components_albums_EditAlbum_vue__WEBPACK_IMPORTED_MODULE_8__["default"]
+  component: _components_albums_EditAlbum_vue__WEBPACK_IMPORTED_MODULE_7__["default"]
 }, {
   name: 'album.show',
   path: '/album/show/:id',
-  component: _components_albums_ShowAlbum_vue__WEBPACK_IMPORTED_MODULE_9__["default"]
+  component: _components_albums_ShowAlbum_vue__WEBPACK_IMPORTED_MODULE_8__["default"]
 }];
 
 /***/ }),

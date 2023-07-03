@@ -1,7 +1,4 @@
 import Login from './components/auth/Login.vue';
-import AllPosts from './components/AllPosts.vue';
-import AddPost from './components/AddPost.vue';
-import EditPost from './components/EditPost.vue';
 
 import AllArtists from './components/artists/AllArtists.vue';
 import AddArtist from './components/artists/AddArtist.vue';
