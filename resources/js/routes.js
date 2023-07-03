@@ -22,16 +22,6 @@ export const routes = [
         component: AllArtists
     },
     {
-        name: 'add',
-        path: '/add',
-        component: AddPost
-    },
-    {
-        name: 'edit',
-        path: '/edit/:id',
-        component: EditPost
-    },
-    {
         name: 'artists',
         path: '/artists',
         component: AllArtists

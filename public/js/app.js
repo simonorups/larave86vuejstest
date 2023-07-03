@@ -7196,10 +7196,7 @@ var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
   return _c("div", {
-    staticClass: "row justify-content-center",
-    staticStyle: {
-      "margin-top": "20%"
-    }
+    staticClass: "row justify-content-center mt-md-4"
   }, [_c("div", {
     staticClass: "col-md-6"
   }, [_c("div", {
@@ -7477,14 +7474,6 @@ var routes = [{
   name: 'home',
   path: '/home',
   component: _components_artists_AllArtists_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
-}, {
-  name: 'add',
-  path: '/add',
-  component: AddPost
-}, {
-  name: 'edit',
-  path: '/edit/:id',
-  component: EditPost
 }, {
   name: 'artists',
   path: '/artists',
