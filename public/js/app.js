@@ -7196,7 +7196,10 @@ var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
   return _c("div", {
-    staticClass: "row justify-content-center mt-md-4"
+    staticClass: "row justify-content-center",
+    staticStyle: {
+      "margin-top": "10%"
+    }
   }, [_c("div", {
     staticClass: "col-md-6"
   }, [_c("div", {

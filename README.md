@@ -26,7 +26,8 @@ NOTE: This may take a while if this is the first time installing this as a conta
 ## 5. Create a database to be used by this project by running these commands below
 
 ```
-mysql --password=  --execute='create database laravel8vuetest'
+mysql -u root -p
+create database laravel8vuetest
 exit
 ```
 
