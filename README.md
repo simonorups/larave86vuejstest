@@ -59,7 +59,7 @@ DB_PASSWORD=
 
 ### 11. Run the servers with Sail 
 
-```vendor/bin/sail up or sail up -d``` to have the containers run in the background
+```./vendor/bin/sail up or sail up -d``` to have the containers run in the background
 
 ### 12. Run your app/project
 
